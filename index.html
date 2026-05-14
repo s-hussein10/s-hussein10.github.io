@@ -357,9 +357,9 @@
   /* FLOATING 3D CHIP */
   .hero-visual {
     position: absolute;
-    right: 4rem; top: 50%;
-    transform: translateY(-50%);
-    width: 380px; height: 380px;
+    right: 0; top: 0; bottom: 0;
+    width: 52%;
+    pointer-events: none;
   }
   .chip-scene {
     width: 100%; height: 100%;
@@ -1656,6 +1656,8 @@
     transform: translate(-50%, -50%);
   }
 
+
+
 </style>
 </head>
 <body>
@@ -1705,150 +1707,244 @@
     </div>
   </div>
 
-  <!-- 3D Chip Visual -->
+  </div>
+
+  <!-- MCU AUTOMOTIVE VISUAL -->
   <div class="hero-visual">
-    <div class="chip-scene">
-      <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
+    <svg width="100%" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+    <defs>
+      <style>
+        .hv-scan { animation: hvscan 2.8s linear infinite; }
+        @keyframes hvscan { 0%{transform:translateY(0);opacity:.7} 100%{transform:translateY(140px);opacity:0} }
+        .hv-dp  { animation: hvdp 2s ease-in-out infinite; }
+        .hv-dp2 { animation: hvdp 2s ease-in-out .4s infinite; }
+        .hv-dp3 { animation: hvdp 2s ease-in-out .8s infinite; }
+        .hv-dp4 { animation: hvdp 2s ease-in-out 1.2s infinite; }
+        .hv-dp5 { animation: hvdp 2s ease-in-out 1.6s infinite; }
+        @keyframes hvdp { 0%,100%{opacity:.15;r:3} 50%{opacity:1;r:5} }
+        .hv-fl  { stroke-dasharray:7 5; animation: hvfl 2s linear infinite; }
+        .hv-fl2 { animation-delay:.65s; }
+        .hv-fl3 { animation-delay:1.3s; }
+        @keyframes hvfl { to { stroke-dashoffset: -48; } }
+        .hv-ring  { animation: hvring 3s ease-out infinite; transform-origin:340px 200px; opacity:0; }
+        .hv-ring2 { animation: hvring 3s ease-out 1s infinite; transform-origin:340px 200px; opacity:0; }
+        .hv-ring3 { animation: hvring 3s ease-out 2s infinite; transform-origin:340px 200px; opacity:0; }
+        @keyframes hvring { 0%{transform:scale(.5);opacity:.4} 100%{transform:scale(1.6);opacity:0} }
+        .hv-ecu { animation: hvef 5s ease-in-out infinite; transform-origin:530px 180px; }
+        @keyframes hvef { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .hv-can { animation: hvcf 4.5s ease-in-out .8s infinite; transform-origin:150px 340px; }
+        @keyframes hvcf { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+        .hv-led  { animation: hvled 1.4s ease-in-out infinite; }
+        .hv-led2 { animation: hvled 1.4s ease-in-out .7s infinite; }
+        @keyframes hvled { 0%,100%{opacity:.3} 50%{opacity:1} }
+        .hv-glow { animation: hvglow 4s ease-in-out infinite; }
+        @keyframes hvglow { 0%,100%{opacity:.6} 50%{opacity:1} }
+        .hv-needle { animation: hvneedle 4s ease-in-out infinite; transform-origin:530px 360px; }
+        @keyframes hvneedle { 0%{transform:rotate(-55deg)} 50%{transform:rotate(30deg)} 100%{transform:rotate(-55deg)} }
+        .hv-wave { animation: hvwave 2s linear infinite; }
+        @keyframes hvwave { to { transform: translateX(-60px); } }
+      </style>
+      <filter id="hvgf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <clipPath id="hvwclip"><rect x="580" y="338" width="60" height="26"/></clipPath>
+    </defs>
 
-        <!-- PCB outer board -->
-        <rect x="60" y="60" width="260" height="260" rx="8"
-          fill="#070a14" stroke="#1e2040" stroke-width="1.5"/>
+    <!-- pulse rings -->
+    <circle class="hv-ring"  cx="340" cy="200" r="130" fill="none" stroke="#c8c8b4" stroke-width="0.7"/>
+    <circle class="hv-ring2" cx="340" cy="200" r="130" fill="none" stroke="#a89880" stroke-width="0.7"/>
+    <circle class="hv-ring3" cx="340" cy="200" r="130" fill="none" stroke="#c8c8b4" stroke-width="0.7"/>
 
-        <!-- Inner chip body -->
-        <rect x="120" y="120" width="140" height="140" rx="4"
-          fill="#0d1225" stroke="#c8c8b4" stroke-width="1" filter="url(#glow)"/>
+    <!-- PCB board -->
+    <rect x="210" y="70" width="260" height="260" rx="8" fill="#0f0f0d" stroke="#2a2a2a" stroke-width="1"/>
+    <!-- chip -->
+    <rect class="hv-glow" x="260" y="110" width="160" height="160" rx="4" fill="#161614" stroke="#c8c8b4" stroke-width="1.2" filter="url(#hvgf)"/>
+    <text x="340" y="174" text-anchor="middle" font-family="Orbitron,sans-serif" font-size="13" fill="#c8c8b4" font-weight="700" letter-spacing="2">MCU</text>
+    <text x="340" y="194" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b6b5a" letter-spacing="1.5">ARM CORTEX-M4</text>
+    <text x="340" y="210" text-anchor="middle" font-family="monospace" font-size="7" fill="#4a4a38" letter-spacing="1">168 MHz · 1MB Flash</text>
+    <!-- scan -->
+    <rect class="hv-scan" x="260" y="110" width="160" height="1.5" fill="#c8c8b4" opacity="0.5"/>
+    <!-- corners -->
+    <g stroke="#c8c8b4" stroke-width="0.8" fill="none" opacity="0.5">
+      <path d="M264 114 L264 122 M264 114 L272 114"/>
+      <path d="M416 114 L416 122 M416 114 L408 114"/>
+      <path d="M264 266 L264 258 M264 266 L272 266"/>
+      <path d="M416 266 L416 258 M416 266 L408 266"/>
+    </g>
+    <!-- TOP pins -->
+    <g fill="#2a2a28" stroke="#c8c8b4" stroke-width="0.5">
+      <rect x="278" y="97" width="12" height="13" rx="1.5"/><rect x="296" y="97" width="12" height="13" rx="1.5"/>
+      <rect x="314" y="97" width="12" height="13" rx="1.5"/><rect x="332" y="97" width="12" height="13" rx="1.5"/>
+      <rect x="350" y="97" width="12" height="13" rx="1.5"/><rect x="368" y="97" width="12" height="13" rx="1.5"/>
+      <rect x="386" y="97" width="12" height="13" rx="1.5"/>
+    </g>
+    <g stroke="#c8c8b4" stroke-width="0.9" opacity="0.55">
+      <line x1="284" y1="110" x2="284" y2="97"/><line x1="302" y1="110" x2="302" y2="97"/>
+      <line x1="320" y1="110" x2="320" y2="97"/><line x1="338" y1="110" x2="338" y2="97"/>
+      <line x1="356" y1="110" x2="356" y2="97"/><line x1="374" y1="110" x2="374" y2="97"/>
+      <line x1="392" y1="110" x2="392" y2="97"/>
+    </g>
+    <!-- BOTTOM pins -->
+    <g fill="#2a2a28" stroke="#a89880" stroke-width="0.5">
+      <rect x="278" y="270" width="12" height="13" rx="1.5"/><rect x="296" y="270" width="12" height="13" rx="1.5"/>
+      <rect x="314" y="270" width="12" height="13" rx="1.5"/><rect x="332" y="270" width="12" height="13" rx="1.5"/>
+      <rect x="350" y="270" width="12" height="13" rx="1.5"/><rect x="368" y="270" width="12" height="13" rx="1.5"/>
+      <rect x="386" y="270" width="12" height="13" rx="1.5"/>
+    </g>
+    <g stroke="#a89880" stroke-width="0.9" opacity="0.55">
+      <line x1="284" y1="270" x2="284" y2="283"/><line x1="302" y1="270" x2="302" y2="283"/>
+      <line x1="320" y1="270" x2="320" y2="283"/><line x1="338" y1="270" x2="338" y2="283"/>
+      <line x1="356" y1="270" x2="356" y2="283"/><line x1="374" y1="270" x2="374" y2="283"/>
+      <line x1="392" y1="270" x2="392" y2="283"/>
+    </g>
+    <!-- LEFT pins -->
+    <g fill="#2a2a28" stroke="#c8c8b4" stroke-width="0.5">
+      <rect x="210" y="125" width="13" height="11" rx="1.5"/><rect x="210" y="142" width="13" height="11" rx="1.5"/>
+      <rect x="210" y="159" width="13" height="11" rx="1.5"/><rect x="210" y="176" width="13" height="11" rx="1.5"/>
+      <rect x="210" y="193" width="13" height="11" rx="1.5"/><rect x="210" y="210" width="13" height="11" rx="1.5"/>
+      <rect x="210" y="227" width="13" height="11" rx="1.5"/><rect x="210" y="244" width="13" height="11" rx="1.5"/>
+    </g>
+    <g stroke="#c8c8b4" stroke-width="0.9" opacity="0.55">
+      <line x1="260" y1="130" x2="223" y2="130"/><line x1="260" y1="147" x2="223" y2="147"/>
+      <line x1="260" y1="164" x2="223" y2="164"/><line x1="260" y1="181" x2="223" y2="181"/>
+      <line x1="260" y1="198" x2="223" y2="198"/><line x1="260" y1="215" x2="223" y2="215"/>
+      <line x1="260" y1="232" x2="223" y2="232"/><line x1="260" y1="249" x2="223" y2="249"/>
+    </g>
+    <!-- RIGHT pins -->
+    <g fill="#2a2a28" stroke="#c8c8b4" stroke-width="0.5">
+      <rect x="457" y="125" width="13" height="11" rx="1.5"/><rect x="457" y="142" width="13" height="11" rx="1.5"/>
+      <rect x="457" y="159" width="13" height="11" rx="1.5"/><rect x="457" y="176" width="13" height="11" rx="1.5"/>
+      <rect x="457" y="193" width="13" height="11" rx="1.5"/><rect x="457" y="210" width="13" height="11" rx="1.5"/>
+      <rect x="457" y="227" width="13" height="11" rx="1.5"/><rect x="457" y="244" width="13" height="11" rx="1.5"/>
+    </g>
+    <g stroke="#c8c8b4" stroke-width="0.9" opacity="0.55">
+      <line x1="420" y1="130" x2="457" y2="130"/><line x1="420" y1="147" x2="457" y2="147"/>
+      <line x1="420" y1="164" x2="457" y2="164"/><line x1="420" y1="181" x2="457" y2="181"/>
+      <line x1="420" y1="198" x2="457" y2="198"/><line x1="420" y1="215" x2="457" y2="215"/>
+      <line x1="420" y1="232" x2="457" y2="232"/><line x1="420" y1="249" x2="457" y2="249"/>
+    </g>
+    <!-- caps -->
+    <ellipse cx="230" cy="90"  rx="7" ry="11" fill="#1a1a18" stroke="#a89880" stroke-width="0.7"/>
+    <ellipse cx="450" cy="90"  rx="7" ry="11" fill="#1a1a18" stroke="#a89880" stroke-width="0.7"/>
+    <ellipse cx="230" cy="310" rx="7" ry="11" fill="#1a1a18" stroke="#a89880" stroke-width="0.7"/>
+    <ellipse cx="450" cy="310" rx="7" ry="11" fill="#1a1a18" stroke="#a89880" stroke-width="0.7"/>
+    <!-- data dots -->
+    <circle class="hv-dp"  cx="284" cy="103" r="3" fill="#c8c8b4"/>
+    <circle class="hv-dp hv-dp2" cx="320" cy="103" r="3" fill="#a89880"/>
+    <circle class="hv-dp hv-dp3" cx="374" cy="103" r="3" fill="#c8c8b4"/>
+    <circle class="hv-dp hv-dp4" cx="223" cy="164" r="3" fill="#c8c8b4"/>
+    <circle class="hv-dp hv-dp5" cx="457" cy="198" r="3" fill="#a89880"/>
 
-        <!-- Chip label -->
-        <text x="190" y="184" text-anchor="middle" font-family="Orbitron,sans-serif"
-          font-size="9" fill="#c8c8b4" letter-spacing="2" font-weight="700">MCU</text>
-        <text x="190" y="198" text-anchor="middle" font-family="IBM Plex Mono,monospace"
-          font-size="7" fill="#7070a0" letter-spacing="1">32-BIT CORE</text>
-        <text x="190" y="210" text-anchor="middle" font-family="IBM Plex Mono,monospace"
-          font-size="6" fill="#3a3a60" letter-spacing="1">v4.2.0</text>
+    <!-- ECU MODULE top-right -->
+    <g class="hv-ecu">
+      <rect x="480" y="55" width="160" height="110" rx="5" fill="#0f0f0d" stroke="#2a2a2a" stroke-width="0.8"/>
+      <text x="560" y="76" text-anchor="middle" font-family="Orbitron,sans-serif" font-size="8" fill="#a89880" letter-spacing="2">AUTOMOTIVE ECU</text>
+      <rect x="492" y="82"  width="40" height="24" rx="2" fill="#161614" stroke="#6b6b5a" stroke-width="0.6"/>
+      <text x="512" y="91"  text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">AUTOSAR</text>
+      <text x="512" y="100" text-anchor="middle" font-family="monospace" font-size="5" fill="#4a4a38">BSW</text>
+      <rect x="540" y="82"  width="36" height="24" rx="2" fill="#161614" stroke="#6b6b5a" stroke-width="0.6"/>
+      <text x="558" y="91"  text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">OSEK</text>
+      <text x="558" y="100" text-anchor="middle" font-family="monospace" font-size="5" fill="#4a4a38">RTOS</text>
+      <rect x="584" y="82"  width="44" height="24" rx="2" fill="#161614" stroke="#6b6b5a" stroke-width="0.6"/>
+      <text x="606" y="91"  text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">ISO 26262</text>
+      <text x="606" y="100" text-anchor="middle" font-family="monospace" font-size="5" fill="#4a4a38">ASIL-B</text>
+      <rect x="490" y="115" width="140" height="10" rx="1" fill="#1a1a18" stroke="#2a2a2a" stroke-width="0.5"/>
+      <g fill="#6b6b5a">
+        <rect x="494" y="117" width="4" height="6" rx="0.5"/><rect x="502" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="510" y="117" width="4" height="6" rx="0.5"/><rect x="518" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="526" y="117" width="4" height="6" rx="0.5"/><rect x="534" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="542" y="117" width="4" height="6" rx="0.5"/><rect x="550" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="558" y="117" width="4" height="6" rx="0.5"/><rect x="566" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="574" y="117" width="4" height="6" rx="0.5"/><rect x="582" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="590" y="117" width="4" height="6" rx="0.5"/><rect x="598" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="606" y="117" width="4" height="6" rx="0.5"/><rect x="614" y="117" width="4" height="6" rx="0.5"/>
+        <rect x="622" y="117" width="4" height="6" rx="0.5"/>
+      </g>
+      <circle class="hv-led"  cx="496" cy="147" r="4" fill="#c8c8b4"/>
+      <circle class="hv-led2" cx="510" cy="147" r="4" fill="#a89880"/>
+      <circle cx="524" cy="147" r="4" fill="#2a2a2a" stroke="#6b6b5a" stroke-width="0.5"/>
+      <text x="545" y="151" font-family="monospace" font-size="6" fill="#4a4a38">PWR  ACT  ERR</text>
+    </g>
+    <!-- trace MCU→ECU -->
+    <path class="hv-fl"  d="M470 130 Q490 120 490 110 L480 110" fill="none" stroke="#c8c8b4" stroke-width="0.8" opacity="0.55"/>
+    <path class="hv-fl hv-fl2" d="M470 147 Q488 140 490 130 L480 130" fill="none" stroke="#a89880" stroke-width="0.8" opacity="0.45"/>
 
-        <!-- Die marks -->
-        <circle cx="150" cy="150" r="3" fill="none" stroke="#c8c8b4" stroke-width="0.5" opacity="0.5"/>
-        <circle cx="230" cy="150" r="3" fill="none" stroke="#c8c8b4" stroke-width="0.5" opacity="0.5"/>
-        <circle cx="150" cy="230" r="3" fill="none" stroke="#c8c8b4" stroke-width="0.5" opacity="0.5"/>
-        <circle cx="230" cy="230" r="3" fill="none" stroke="#c8c8b4" stroke-width="0.5" opacity="0.5"/>
+    <!-- CAN BUS bottom-left -->
+    <g class="hv-can">
+      <rect x="30" y="300" width="200" height="120" rx="5" fill="#0f0f0d" stroke="#2a2a2a" stroke-width="0.8"/>
+      <text x="130" y="320" text-anchor="middle" font-family="Orbitron,sans-serif" font-size="8" fill="#a89880" letter-spacing="2">CAN BUS</text>
+      <rect x="44"  y="328" width="60" height="36" rx="3" fill="#161614" stroke="#c8c8b4" stroke-width="0.8"/>
+      <text x="74"  y="342" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8c8b4">TJA1050</text>
+      <text x="74"  y="354" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#6b6b5a">TRANSCEIVER</text>
+      <g stroke="#6b6b5a" stroke-width="0.7">
+        <line x1="44" y1="334" x2="36" y2="334"/><line x1="44" y1="342" x2="36" y2="342"/>
+        <line x1="44" y1="350" x2="36" y2="350"/>
+        <line x1="104" y1="334" x2="112" y2="334"/><line x1="104" y1="342" x2="112" y2="342"/>
+        <line x1="104" y1="350" x2="112" y2="350"/>
+      </g>
+      <path d="M112 334 Q145 334 145 342 Q145 350 178 350" fill="none" stroke="#c8c8b4" stroke-width="1.2"/>
+      <path d="M112 350 Q145 350 145 342 Q145 334 178 334" fill="none" stroke="#6b6b5a" stroke-width="1.2"/>
+      <text x="148" y="330" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#6b6b5a">CAN-H</text>
+      <text x="148" y="360" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#4a4a38">CAN-L</text>
+      <rect x="40"  y="376" width="44" height="16" rx="2" fill="#1a1a18" stroke="#6b6b5a" stroke-width="0.5"/>
+      <text x="62"  y="387" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">CAN-FD</text>
+      <rect x="90"  y="376" width="30" height="16" rx="2" fill="#1a1a18" stroke="#6b6b5a" stroke-width="0.5"/>
+      <text x="105" y="387" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">LIN</text>
+      <rect x="126" y="376" width="34" height="16" rx="2" fill="#1a1a18" stroke="#6b6b5a" stroke-width="0.5"/>
+      <text x="143" y="387" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">UDS</text>
+      <rect x="166" y="376" width="46" height="16" rx="2" fill="#1a1a18" stroke="#6b6b5a" stroke-width="0.5"/>
+      <text x="189" y="387" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b6b5a">OBD-II</text>
+      <circle class="hv-dp hv-dp3" cx="178" cy="342" r="3" fill="#c8c8b4"/>
+    </g>
+    <!-- trace MCU→CAN -->
+    <path class="hv-fl hv-fl3" d="M223 249 Q180 280 180 300" fill="none" stroke="#c8c8b4" stroke-width="0.8" opacity="0.5"/>
+    <path class="hv-fl"        d="M223 232 Q175 270 175 300" fill="none" stroke="#a89880" stroke-width="0.8" opacity="0.4"/>
 
-        <!-- Trace lines — top -->
-        <g stroke="#c8c8b4" stroke-width="0.8" opacity="0.6">
-          <line x1="140" y1="120" x2="140" y2="80"/>
-          <line x1="160" y1="120" x2="160" y2="80"/>
-          <line x1="180" y1="120" x2="180" y2="80"/>
-          <line x1="200" y1="120" x2="200" y2="80"/>
-          <line x1="220" y1="120" x2="220" y2="80"/>
-          <line x1="240" y1="120" x2="240" y2="80"/>
-        </g>
+    <!-- RPM GAUGE bottom-right -->
+    <rect x="450" y="300" width="200" height="150" rx="5" fill="#0f0f0d" stroke="#2a2a2a" stroke-width="0.8"/>
+    <text x="550" y="320" text-anchor="middle" font-family="Orbitron,sans-serif" font-size="8" fill="#a89880" letter-spacing="2">ENGINE SENSOR</text>
+    <circle cx="530" cy="375" r="44" fill="#111" stroke="#2a2a2a" stroke-width="0.8"/>
+    <circle cx="530" cy="375" r="36" fill="#111" stroke="#6b6b5a" stroke-width="0.5" stroke-dasharray="4 3"/>
+    <path d="M494 400 A44 44 0 1 1 566 400" fill="none" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
+    <path d="M494 400 A44 44 0 1 1 566 400" fill="none" stroke="#c8c8b4" stroke-width="3" stroke-dasharray="110 60" stroke-linecap="round" opacity="0.7"/>
+    <g stroke="#6b6b5a" stroke-width="0.8">
+      <line x1="530" y1="331" x2="530" y2="339"/><line x1="486" y1="375" x2="494" y2="375"/>
+      <line x1="574" y1="375" x2="566" y2="375"/><line x1="499" y1="344" x2="505" y2="350"/>
+      <line x1="561" y1="344" x2="555" y2="350"/>
+    </g>
+    <line class="hv-needle" x1="530" y1="375" x2="530" y2="340" stroke="#c8c8b4" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="530" cy="375" r="6" fill="#1a1a18" stroke="#c8c8b4" stroke-width="0.8"/>
+    <circle cx="530" cy="375" r="2" fill="#c8c8b4"/>
+    <text x="530" y="396" text-anchor="middle" font-family="monospace" font-size="6" fill="#4a4a38" letter-spacing="1">RPM × 1000</text>
+    <g clip-path="url(#hvwclip)">
+      <path class="hv-wave" d="M580 355 L590 355 L590 345 L600 345 L600 355 L610 355 L610 345 L620 345 L620 355 L630 355 L630 345 L640 345 L640 355"
+        fill="none" stroke="#c8c8b4" stroke-width="0.8" opacity="0.6"/>
+    </g>
+    <text x="610" y="374" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#4a4a38">OBD SIGNAL</text>
+    <!-- trace MCU→gauge -->
+    <path class="hv-fl hv-fl2" d="M470 198 Q490 220 490 280 Q490 300 490 300" fill="none" stroke="#c8c8b4" stroke-width="0.8" opacity="0.5"/>
 
-        <!-- Trace lines — bottom -->
-        <g stroke="#a89880" stroke-width="0.8" opacity="0.6">
-          <line x1="140" y1="260" x2="140" y2="300"/>
-          <line x1="160" y1="260" x2="160" y2="300"/>
-          <line x1="180" y1="260" x2="180" y2="300"/>
-          <line x1="200" y1="260" x2="200" y2="300"/>
-          <line x1="220" y1="260" x2="220" y2="300"/>
-          <line x1="240" y1="260" x2="240" y2="300"/>
-        </g>
+    <!-- MEMORY top-left -->
+    <rect x="30" y="55" width="160" height="100" rx="5" fill="#0f0f0d" stroke="#2a2a2a" stroke-width="0.8"/>
+    <text x="110" y="76" text-anchor="middle" font-family="Orbitron,sans-serif" font-size="8" fill="#a89880" letter-spacing="2">MEMORY</text>
+    <rect x="44"  y="84" width="58" height="32" rx="2" fill="#161614" stroke="#c8c8b4" stroke-width="0.7"/>
+    <text x="73"  y="97" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8c8b4">FLASH</text>
+    <text x="73"  y="108" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#6b6b5a">1MB EEPROM</text>
+    <rect x="112" y="84" width="58" height="32" rx="2" fill="#161614" stroke="#a89880" stroke-width="0.7"/>
+    <text x="141" y="97" text-anchor="middle" font-family="monospace" font-size="7" fill="#a89880">RAM</text>
+    <text x="141" y="108" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#6b6b5a">192KB SRAM</text>
+    <line x1="44" y1="130" x2="180" y2="130" stroke="#2a2a2a" stroke-width="1.5"/>
+    <g class="hv-fl hv-fl3" stroke="#c8c8b4" stroke-width="0.6" fill="none" opacity="0.4">
+      <line x1="44" y1="132" x2="180" y2="132"/><line x1="44" y1="135" x2="180" y2="135"/>
+      <line x1="44" y1="138" x2="180" y2="138"/><line x1="44" y1="141" x2="180" y2="141"/>
+    </g>
+    <text x="110" y="150" text-anchor="middle" font-family="monospace" font-size="6" fill="#4a4a38">AHB · APB BUS</text>
+    <!-- trace MCU→memory -->
+    <path class="hv-fl hv-fl2" d="M223 130 Q200 110 190 110" fill="none" stroke="#c8c8b4" stroke-width="0.8" opacity="0.5"/>
 
-        <!-- Trace lines — left -->
-        <g stroke="#6b6b5a" stroke-width="0.8" opacity="0.6">
-          <line x1="120" y1="140" x2="80" y2="140"/>
-          <line x1="120" y1="160" x2="80" y2="160"/>
-          <line x1="120" y1="180" x2="80" y2="180"/>
-          <line x1="120" y1="200" x2="80" y2="200"/>
-          <line x1="120" y1="220" x2="80" y2="220"/>
-          <line x1="120" y1="240" x2="80" y2="240"/>
-        </g>
-
-        <!-- Trace lines — right -->
-        <g stroke="#c8c8b4" stroke-width="0.8" opacity="0.6">
-          <line x1="260" y1="140" x2="300" y2="140"/>
-          <line x1="260" y1="160" x2="300" y2="160"/>
-          <line x1="260" y1="180" x2="300" y2="180"/>
-          <line x1="260" y1="200" x2="300" y2="200"/>
-          <line x1="260" y1="220" x2="300" y2="220"/>
-          <line x1="260" y1="240" x2="300" y2="240"/>
-        </g>
-
-        <!-- Pads top -->
-        <g fill="#1e3040">
-          <rect x="135" y="72" width="10" height="8" rx="1"/>
-          <rect x="155" y="72" width="10" height="8" rx="1"/>
-          <rect x="175" y="72" width="10" height="8" rx="1"/>
-          <rect x="195" y="72" width="10" height="8" rx="1"/>
-          <rect x="215" y="72" width="10" height="8" rx="1"/>
-          <rect x="235" y="72" width="10" height="8" rx="1"/>
-        </g>
-
-        <!-- Pads bottom -->
-        <g fill="#3a1a0a">
-          <rect x="135" y="300" width="10" height="8" rx="1"/>
-          <rect x="155" y="300" width="10" height="8" rx="1"/>
-          <rect x="175" y="300" width="10" height="8" rx="1"/>
-          <rect x="195" y="300" width="10" height="8" rx="1"/>
-          <rect x="215" y="300" width="10" height="8" rx="1"/>
-          <rect x="235" y="300" width="10" height="8" rx="1"/>
-        </g>
-
-        <!-- Pads left -->
-        <g fill="#1a0a3a">
-          <rect x="72" y="135" width="8" height="10" rx="1"/>
-          <rect x="72" y="155" width="8" height="10" rx="1"/>
-          <rect x="72" y="175" width="8" height="10" rx="1"/>
-          <rect x="72" y="195" width="8" height="10" rx="1"/>
-          <rect x="72" y="215" width="8" height="10" rx="1"/>
-          <rect x="72" y="235" width="8" height="10" rx="1"/>
-        </g>
-
-        <!-- Pads right -->
-        <g fill="#1e3040">
-          <rect x="300" y="135" width="8" height="10" rx="1"/>
-          <rect x="300" y="155" width="8" height="10" rx="1"/>
-          <rect x="300" y="175" width="8" height="10" rx="1"/>
-          <rect x="300" y="195" width="8" height="10" rx="1"/>
-          <rect x="300" y="215" width="8" height="10" rx="1"/>
-          <rect x="300" y="235" width="8" height="10" rx="1"/>
-        </g>
-
-        <!-- Corner components -->
-        <rect x="80" y="80" width="20" height="12" rx="2" fill="#0f1a2a" stroke="#1e2040" stroke-width="0.5"/>
-        <rect x="280" y="80" width="20" height="12" rx="2" fill="#0f1a2a" stroke="#1e2040" stroke-width="0.5"/>
-        <rect x="80" y="288" width="20" height="12" rx="2" fill="#0f1a2a" stroke="#1e2040" stroke-width="0.5"/>
-        <rect x="280" y="288" width="20" height="12" rx="2" fill="#0f1a2a" stroke="#1e2040" stroke-width="0.5"/>
-
-        <!-- Scanning line animation -->
-        <rect x="120" y="120" width="140" height="2" fill="url(#scanGrad)" opacity="0.6">
-          <animate attributeName="y" from="120" to="260" dur="2.5s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" repeatCount="indefinite"/>
-        </rect>
-
-        <defs>
-          <linearGradient id="scanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="transparent"/>
-            <stop offset="50%" stop-color="#00e5ff"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Pulse rings -->
-        <circle cx="190" cy="190" r="80" fill="none" stroke="#c8c8b4" stroke-width="0.5" opacity="0.2">
-          <animate attributeName="r" from="80" to="140" dur="3s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" from="0.3" to="0" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="190" cy="190" r="80" fill="none" stroke="#c8c8b4" stroke-width="0.5" opacity="0.2">
-          <animate attributeName="r" from="80" to="140" dur="3s" begin="1.5s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" from="0.3" to="0" dur="3s" begin="1.5s" repeatCount="indefinite"/>
-        </circle>
-      </svg>
-    </div>
+    <!-- extra dots -->
+    <circle class="hv-dp hv-dp2" cx="200" cy="115" r="3" fill="#c8c8b4"/>
+    <circle class="hv-dp hv-dp4" cx="480" cy="195" r="3" fill="#a89880"/>
+    <circle class="hv-dp hv-dp5" cx="200" cy="270" r="3" fill="#c8c8b4"/>
+    </svg>
   </div>
 </section>
 
